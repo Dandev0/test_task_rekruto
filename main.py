@@ -1,4 +1,6 @@
 from aiohttp import web
+import aiohttp_jinja2
+import jinja2
 
 
 app = web.Application()
@@ -6,10 +8,12 @@ routes = web.RouteTableDef()
 
 
 @routes.get('/')
+@aiohttp_jinja2.template('index.html')
 async def handler_get(request):
     name = request.rel_url.query['name']
     message = request.rel_url.query['message']
-    return web.Response(text=f"Hello {name}, {message}")
+    info = f'{name}, {message}'
+    return info 
 
 
 @routes.post('/')
