@@ -22,7 +22,7 @@ async def handler_post(request):
 
 def main():
     app.add_routes(routes)
-    web.run_app(app, host='http://rekruto.io/', port=8080)
+    web.run_app(app, host='https://dandev0.github.io/test_task_rekruto/', port=8080)
 
 
 if __name__ == '__main__':
