@@ -5,14 +5,14 @@ app = web.Application()
 routes = web.RouteTableDef()
 
 
-@routes.get('/rekruto')
+@routes.get('/')
 async def handler_get(request):
     name = request.rel_url.query['name']
     message = request.rel_url.query['message']
     return web.Response(text=f"Hello {name}, {message}")
 
 
-@routes.post('/rekruto')
+@routes.post('/')
 async def handler_post(request):
     data = await request.json()
     name = data['name']
