@@ -1,21 +1,17 @@
-from aiohttp import web
+from flask import Flask, render_template, request
 
 
-app = web.Application()
-routes = web.RouteTableDef()
+app = Flask(__name__)
+app.secret_key = "super secret key"
 
 
-@routes.get('/rekruto')
-async def handler_get(request):
-    name = request.rel_url.query['name']
-    message = request.rel_url.query['message']
-    return web.Response(text=f'Привет {name}, {message}')
+@app.route('/rekruto', methods = ['GET'])
+def handler_get():
+    name = request.args['name']
+    message = request.args['message']
+    print(name, message)
+    return render_template('index.html', name=name, message=message)
 
 
-def main():
-    app.add_routes(routes)
-    web.run_app(app, host='https://dandev0.github.io/test_task_rekruto/', port=8080)
-
-
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    app.run(debug=True)
